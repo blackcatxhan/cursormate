@@ -10,52 +10,23 @@ env:
   BINARY_NAME: cursor-mate
   RUST_BACKTRACE: 1
 
+permissions:
+  contents: write
+
 jobs:
-  create-release:
-    runs-on: ubuntu-latest
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      version: ${{ steps.version.outputs.version }}
-    steps:
-      - name: Extract version
-        id: version
-        run: echo "version=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ steps.version.outputs.version }}
-          draft: false
-          prerelease: false
-          body: |
-            Release ${{ steps.version.outputs.version }}
-            
-            ## 支持平台
-            - Windows (x64)
-            - macOS (Intel x64)
-            - macOS (Apple Silicon)
-
   build-release:
-    needs: create-release
     strategy:
       matrix:
         include:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
-            artifact_name: cursor-mate-windows-x64.zip
-            asset_content_type: application/zip
+            artifact_name: cursor-mate-${{ github.ref_name }}-windows-x64.zip
           - os: macos-latest
             target: x86_64-apple-darwin
-            artifact_name: cursor-mate-macos-x64.tar.gz
-            asset_content_type: application/gzip
+            artifact_name: cursor-mate-${{ github.ref_name }}-macos-x64.tar.gz
           - os: macos-latest
             target: aarch64-apple-darwin
-            artifact_name: cursor-mate-macos-arm64.tar.gz
-            asset_content_type: application/gzip
+            artifact_name: cursor-mate-${{ github.ref_name }}-macos-arm64.tar.gz
     
     runs-on: ${{ matrix.os }}
     steps:
@@ -86,13 +57,35 @@ jobs:
           fi
           cd -
 
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
         with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./${{ matrix.artifact_name }}
-          asset_name: ${{ matrix.artifact_name }}
-          asset_content_type: ${{ matrix.asset_content_type }}
+          name: artifacts
+          path: ./${{ matrix.artifact_name }}
+          retention-days: 1
+
+  publish-release:
+    needs: build-release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Download artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: artifacts
+          path: ./artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: ./artifacts/*
+          body: |
+            Release ${{ github.ref_name }}
+            
+            ## 支持平台
+            - Windows (x64)
+            - macOS (Intel x64)
+            - macOS (Apple Silicon)
+          token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
 
