@@ -67,6 +67,8 @@ jobs:
   publish-release:
     needs: build-release
     runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 添加权限声明
     steps:
       - uses: actions/checkout@v3
       
@@ -78,8 +80,6 @@ jobs:
 
       - name: Create Release
         uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}  # 添加这行
         with:
           files: ./artifacts/*
           body: |
