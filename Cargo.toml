@@ -1,0 +1,12 @@
+[package]
+name = "cursor-mate"
+version = "0.0.1"
+edition = "2021"
+authors = ["Kory Kim"]
+description = "A CLI tool to manage Cursor configuration files."
+url = "https://github.com/korykim/cursormate"
+
+[dependencies]
+uuid = { version = "1.4.1", features = ["v4"] }
+directories = "5.0.1"
+clap = { version = "4.4.6", features = ["derive"] }
