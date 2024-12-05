@@ -1,7 +1,6 @@
 # Cursor-Mate
 
-Cursor-Mate 是一个用于管理 Cursor 配置文件的命令行工具。
-解决Cursor删除账号再登陆后，出现提示“Too many free trial accounts used on this machine.”的问题。
+Cursor-Mate 是一个用于管理 Cursor 配置文件的命令行工具。 解决Cursor删除账号再登陆后，出现提示“Too many free trial accounts used on this machine.”的问题。
 
 ## 功能特点
 
@@ -24,12 +23,10 @@ Cursor-Mate 是一个用于管理 Cursor 配置文件的命令行工具。
 
 ## 使用方法
 
-cursor-mate
-```
-
 cursor-mate.exe <命令>
 
 ### 可用命令
+
 
 | 命令 | 说明 |
 |------|------|
@@ -38,6 +35,7 @@ cursor-mate.exe <命令>
 | `delete` | 删除机器 ID 文件 |
 | `kill` | 终止所有 Cursor 进程 |
 | `help` | 显示帮助信息 |
+
 
 ### 选项
 
