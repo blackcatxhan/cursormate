@@ -27,6 +27,9 @@ jobs:
           - os: macos-latest
             target: aarch64-apple-darwin
             artifact_name: cursor-mate-${{ github.ref_name }}-macos-arm64.tar.gz
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            artifact_name: cursor-mate-${{ github.ref_name }}-linux-x64.tar.gz
     
     runs-on: ${{ matrix.os }}
     steps:
@@ -86,9 +89,13 @@ jobs:
           files: ./artifacts/*
           body: |
             Release ${{ github.ref_name }}
-            
+
+            ## 修复问题
+            - 删除 Cursor 账号后，再次登录时出现提示“Too many free trial accounts used on this machine.”
+            - 支持 Windows、macOS、Linux 平台
+          
             ## 支持平台
             - Windows (x64)
             - macOS (Intel x64)
             - macOS (Apple Silicon)
-
+            - Linux (x64)
