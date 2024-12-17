@@ -6,6 +6,8 @@ use clap::{Parser, Subcommand};
 use std::process::Command;
 use serde_json::Value;
 use serde_json::json;
+#[cfg(unix)]
+use std::os::unix::fs::PermissionsExt;
 
 #[derive(Parser)]
 #[command(name = "cursor-mate")]
@@ -75,12 +77,11 @@ fn set_file_permissions(_path: &PathBuf) -> std::io::Result<()> {
     
     #[cfg(unix)]  // 同时处理 Linux 和 macOS
     {
-        use std::os::unix::fs::PermissionsExt;
         let metadata = fs::metadata(_path)?;
         let mut perms = metadata.permissions();
         perms.set_mode(0o644);  // 设置用户读写，组和其他用户只读权限
         fs::set_permissions(_path, perms)?;
-        
+        Ok(())
     }
     Ok(())
 }
@@ -217,7 +218,7 @@ fn kill_cursor_processes() {
                 if output.status.success() {
                     println!("成功终止所有 Cursor 进程");
                 } else {
-                    // 如果优雅终止失败，再尝试强制终止
+                    // 如果优雅终止失��，再尝试强制终止
                     let force_output = Command::new("pkill")
                         .args(["-KILL", "Cursor"])
                         .output();
@@ -255,7 +256,7 @@ fn main() {
         }
         Commands::Delete => {
             if let Some(file_path) = get_storage_path() {
-                println!("确定要删除配置文件吗? [y/N]");
+                println!("确定要删除配置���件吗? [y/N]");
                 let mut input = String::new();
                 if std::io::stdin().read_line(&mut input).is_ok() {
                     if input.trim().to_lowercase() == "y" {
