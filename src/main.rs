@@ -18,18 +18,14 @@ fn main() {
             }
         }
         Commands::RandomIds => {
-            if process::is_cursor_running() {
-                println!("检测到 Cursor 正在运行，尝试关闭进程...");
-                process::kill_cursor_processes();
-                
-                thread::sleep(Duration::from_secs(3));
-                
-                if process::is_cursor_running() {
-                    eprintln!("无法完全关闭 Cursor 进程，请手动关闭后再试");
-                    return;
-                }
-            }
+
+            // 无论 Cursor 进程是否存在，都尝试关闭进程
+            process::kill_cursor_processes();
             
+            // 等待 3 秒确保进程完全关闭
+            thread::sleep(Duration::from_secs(3));
+
+        
             if let Err(e) = telemetry::update_storage_ids() {
                 eprintln!("更新 ID 失败: {}", e);
             }
