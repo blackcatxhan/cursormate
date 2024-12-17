@@ -4,7 +4,7 @@ version = "0.0.2"
 edition = "2021"
 authors = ["Kory Kim"]
 description = "A CLI tool to manage Cursor configuration files."
-url = "https://github.com/korykim/cursormate"
+repository = "https://github.com/korykim/cursormate"
 
 [dependencies]
 uuid = { version = "1.4.1", features = ["v4"] }
