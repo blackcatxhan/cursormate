@@ -72,7 +72,7 @@ fn set_file_permissions(_path: &PathBuf) -> std::io::Result<()> {
         let mut perms = metadata.permissions();
         perms.set_mode(0o644); // 设置读写权限
         fs::set_permissions(_path, perms)?;
-     
+        
     }
     
     #[cfg(unix)]  // 同时处理 Linux 和 macOS
@@ -81,7 +81,7 @@ fn set_file_permissions(_path: &PathBuf) -> std::io::Result<()> {
         let mut perms = metadata.permissions();
         perms.set_mode(0o644);  // 设置用户读写，组和其他用户只读权限
         fs::set_permissions(_path, perms)?;
-        Ok(())
+        
     }
     Ok(())
 }
