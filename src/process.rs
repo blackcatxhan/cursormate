@@ -128,7 +128,7 @@ pub fn kill_cursor_processes() {
     {
         if let Ok(pids) = find_pids("cursor.exe") {
             if pids.is_empty() {
-                println!("没有找到运行中的 Cursor 进程");
+                println!("No running Cursor process found");
                 return;
             }
 
@@ -136,18 +136,18 @@ pub fn kill_cursor_processes() {
             for pid in pids {
                 match kill_process(pid) {
                     Ok(()) => {
-                        println!("成功终止 Cursor 进程 (PID: {})", pid);
+                        println!("Successfully terminated the Cursor process (PID: {})", pid);
                         success = true;
                     }
-                    Err(()) => eprintln!("无法终止 Cursor 进程 (PID: {})", pid),
+                    Err(()) => eprintln!("Unable to terminate Cursor process (PID: {})", pid),
                 }
             }
 
             if success {
-                println!("成功终止所有 Cursor 进程");
+                println!("Successfully terminated all Cursor processes");
             }
         } else {
-            eprintln!("查找 Cursor 进程失败");
+            eprintln!("Failed to find Cursor process");
         }
     }
 
@@ -155,7 +155,7 @@ pub fn kill_cursor_processes() {
     {
         if let Ok(pids) = find_pids("Cursor").or_else(|_| find_pids("cursor")) {
             if pids.is_empty() {
-                println!("没有找到运行中的 Cursor 进程");
+                println!("No running Cursor process found");
                 return;
             }
 
@@ -163,26 +163,26 @@ pub fn kill_cursor_processes() {
             for pid in &pids {
                 match unsafe { kill(*pid as i32, SIGTERM) } {
                     0 => {
-                        println!("成功终止 Cursor 进程 (PID: {})", pid);
+                        println!("Successfully terminated the Cursor process (PID: {})", pid);
                         success = true;
                     }
                     _ => {
                         match kill_process(*pid) {
                             Ok(()) => {
-                                println!("成功强制终止 Cursor 进程 (PID: {})", pid);
+                                println!("Successfully forced the Cursor process to terminate (PID: {})", pid);
                                 success = true;
                             }
-                            Err(()) => eprintln!("无法终止 Cursor 进程 (PID: {})", pid),
+                            Err(()) => eprintln!("Unable to terminate Cursor process (PID: {})", pid),
                         }
                     }
                 }
             }
 
             if success {
-                println!("成功终止所有 Cursor 进程");
+                println!("Successfully terminated all Cursor processes");
             }
         } else {
-            eprintln!("查找 Cursor 进程失败");
+            eprintln!("Failed to find Cursor process");
         }
     }
 }
