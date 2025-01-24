@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "cursor-mate")]
-#[command(about = "The command line tool to manage the Cursor configuration file", long_about = None)]
+#[command(about = "Command line tool for managing Cursor configuration files", long_about = None)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
@@ -10,12 +10,12 @@ pub struct Cli {
 
 #[derive(Subcommand)]
 pub enum Commands {
-    /// 显示当前 Telemetry IDs 信息
+    /// Display current Telemetry IDs information
     Ids,
-    /// 生成随机 Telemetry IDs
+    /// Generate random Telemetry IDs
     RandomIds,
-    /// 删除配置文件
+    /// Deleting a Profile
     Delete,
-    /// 终止所有 Cursor 进程
+    /// Terminate all Cursor processes
     Kill,
 } 
