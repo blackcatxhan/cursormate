@@ -19,10 +19,10 @@ fn main() {
         }
         Commands::RandomIds => {
 
-            // 无论 Cursor 进程是否存在，都尝试关闭进程
+            // Try to close the process regardless of whether the Cursor process exists
             process::kill_cursor_processes();
             
-            // 等待 3 秒确保进程完全关闭
+            // Wait 3 seconds to ensure the process is completely shut down
             thread::sleep(Duration::from_secs(3));
 
         
