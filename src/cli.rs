@@ -2,7 +2,7 @@ use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
 #[command(name = "cursor-mate")]
-#[command(about = "管理 Cursor 配置文件的命令行工具", long_about = None)]
+#[command(about = "The command line tool to manage the Cursor configuration file", long_about = None)]
 pub struct Cli {
     #[command(subcommand)]
     pub command: Commands,
