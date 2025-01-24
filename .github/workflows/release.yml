@@ -71,7 +71,7 @@ jobs:
     needs: build-release
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 添加权限声明
+      contents: write  # Add permission statement
     steps:
       - uses: actions/checkout@v3
       
@@ -84,17 +84,17 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         env:
-          GITHUB_TOKEN: ${{ github.token }}  # 使用默认的 GITHUB_TOKEN
+          GITHUB_TOKEN: ${{ github.token }}  # Using the default GITHUB_TOKEN
         with:
           files: ./artifacts/*
           body: |
             Release ${{ github.ref_name }}
 
-            ## 修复问题
-            - 删除 Cursor 账号后，再次登录时出现提示“Too many free trial accounts used on this machine.”
-            - 支持 Windows、macOS、Linux 平台
+            ## Fixed issues
+            - After deleting the Cursor account, a message "Too many free trial accounts used on this machine." will appear when logging in again
+            - Supports Windows, macOS, and Linux platforms
           
-            ## 支持平台
+            ## Supported Platforms
             - Windows (x64)
             - macOS (Intel x64)
             - macOS (Apple Silicon)
