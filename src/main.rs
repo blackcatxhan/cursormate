@@ -14,7 +14,7 @@ fn main() {
     match cli.command {
         Commands::Ids => {
             if let Err(e) = telemetry::show_telemetry_ids() {
-                eprintln!("Reading ID failed: {}", e);
+                eprintln!("Read ID failed: {}", e);
             }
         }
         Commands::RandomIds => {
@@ -32,7 +32,7 @@ fn main() {
         }
         Commands::Delete => {
             if let Err(e) = config::delete_config_file() {
-                eprintln!("Failed to delete configuration file: {}", e);
+                eprintln!("Failed to delete the configuration file: {}", e);
             }
         }
         Commands::Kill => {
