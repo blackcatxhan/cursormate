@@ -14,7 +14,7 @@ fn main() {
     match cli.command {
         Commands::Ids => {
             if let Err(e) = telemetry::show_telemetry_ids() {
-                eprintln!("读取 ID 失败: {}", e);
+                eprintln!("Reading ID failed: {}", e);
             }
         }
         Commands::RandomIds => {
@@ -27,12 +27,12 @@ fn main() {
 
         
             if let Err(e) = telemetry::update_storage_ids() {
-                eprintln!("更新 ID 失败: {}", e);
+                eprintln!("Update ID failed: {}", e);
             }
         }
         Commands::Delete => {
             if let Err(e) = config::delete_config_file() {
-                eprintln!("删除配置文件失败: {}", e);
+                eprintln!("Failed to delete configuration file: {}", e);
             }
         }
         Commands::Kill => {
