@@ -52,14 +52,14 @@ pub fn set_file_permissions(_path: &PathBuf) -> std::io::Result<()> {
 
 pub fn delete_config_file() -> Result<(), Box<dyn std::error::Error>> {
     if let Some(file_path) = get_storage_path() {
-        println!("确定要删除配置文件吗? [y/N]");
+        println!("Are you sure to delete the configuration file? [y/N]");
         let mut input = String::new();
         if std::io::stdin().read_line(&mut input).is_ok() {
             if input.trim().to_lowercase() == "y" {
                 fs::remove_file(&file_path)?;
-                println!("配置文件已删除");
+                println!("The configuration file has been deleted");
             } else {
-                println!("已取消删除");
+                println!("Cancelled and deleted");
             }
         }
     }
