@@ -20,7 +20,7 @@ Cursor-Mate is a command-line tool for managing Cursor configuration files. It r
 
 ## Installation
 
-[Releases](https://github.com/korykim/cursormate/releases)
+[Releases](https://github.com/blackcatxhan/cursormate/releases)
 
 ## Usage
 
