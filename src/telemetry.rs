@@ -11,10 +11,10 @@ pub fn generate_64_hex() -> String {
 }
 
 pub fn update_storage_ids() -> Result<(), Box<dyn std::error::Error>> {
-    let file_path = get_storage_path().ok_or("无法获取配置文件路径")?;
+    let file_path = get_storage_path().ok_or("Unable to get the configuration file path")?;
     
     if !file_path.exists() {
-        return Err("配置文件不存在".into());
+        return Err("The configuration file does not exist".into());
     }
     
     set_file_permissions(&file_path)?;
@@ -35,7 +35,7 @@ pub fn update_storage_ids() -> Result<(), Box<dyn std::error::Error>> {
     
     fs::write(&file_path, serde_json::to_string_pretty(&json)?)?;
     
-    println!("已更新 Telemetry IDs:");
+    println!("Updated Telemetry IDs:");
     println!("Mac Machine ID: {}", mac_machine_id);
     println!("Machine ID: {}", machine_id);
     println!("Dev Device ID: {}", dev_device_id);
@@ -44,17 +44,17 @@ pub fn update_storage_ids() -> Result<(), Box<dyn std::error::Error>> {
 }
 
 pub fn show_telemetry_ids() -> Result<(), Box<dyn std::error::Error>> {
-    let file_path = get_storage_path().ok_or("无法获取配置文件路径")?;
+    let file_path = get_storage_path().ok_or("Unable to get the configuration file path")?;
     
     if !file_path.exists() {
-        return Err("配置文件不存在".into());
+        return Err("The configuration file does not exist".into());
     }
     
     let content = fs::read_to_string(&file_path)?;
     let json: Value = serde_json::from_str(&content)?;
     
-    println!("当前 Telemetry IDs:");
-    println!("文件路径: {:?}", file_path);
+    println!("Current Telemetry IDs:");
+    println!("File Path: {:?}", file_path);
     
     if let Value::Object(ref map) = json {
         if let Some(value) = map.get("telemetry.macMachineId") {
