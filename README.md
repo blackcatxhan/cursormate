@@ -1,79 +1,67 @@
-
-简体中文 / [English](./README_EN.md)
-
-
 # Cursor-Mate
 
-Cursor-Mate 是一个用于管理 Cursor 配置文件的命令行工具。 解决Cursor删除账号再登陆后，出现提示“Too many free trial accounts used on this machine.”的问题。
+Cursor-Mate is a command-line tool for managing Cursor configuration files. It resolves the "Too many free trial accounts used on this machine" issue that occurs after deleting and re-logging into Cursor accounts.
 
-## 功能特点
+## Features
 
-- 查看 Telemetry IDs 信息
-- 生成随机 Telemetry IDs
-- 删除配置文件
-- 终止 Cursor 进程
-- 跨平台支持
+- View Telemetry IDs information
+- Generate random Telemetry IDs
+- Delete configuration files
+- Terminate Cursor processes
+- Cross-platform support
 
-## 系统支持
+
+## System Support
 
 - Windows (x64)
 - macOS (Intel x64)
 - macOS (Apple Silicon)
 - Linux (x64)
 
-## 安装
+## Installation
 
-[Releases](https://github.com/korykim/cursormate/releases)
+[Releases](https://github.com/blackcatxhan/cursormate/releases)
 
+## Usage
 
-## 使用方法
+cursor-mate <command>
 
-cursor-mate.exe <命令>
+### Available Commands
 
-### 可用命令
+| Command | Description |
+|---------|-------------|
+| `ids` | Display current Telemetry IDs information |
+| `random-ids` | Generate random Telemetry IDs |
+| `delete` | Delete configuration file |
+| `kill` | Terminate all Cursor processes |
+| `help` | Show help information |
 
+### Options
 
-| 命令 | 说明 |
-|------|------|
-| `ids` | 显示当前 Telemetry IDs 信息 |
-| `random-ids` | 生成随机 Telemetry IDs |
-| `delete` | 删除配置文件 |
-| `kill` | 终止所有 Cursor 进程 |
-| `help` | 显示帮助信息 |
+- `-h, --help`: Show help information
 
+## Examples
 
-### 选项
-
-- `-h, --help`: 显示帮助信息
-
-## 示例
-
-显示当前 IDs：
-
+Display current IDs:
 ```bash
-cursor-mate.exe ids
+cursor-mate ids
 ```
 
-生成随机 IDs：
-
+Generate random IDs:
 ```bash
-cursor-mate.exe random-ids
+cursor-mate random-ids
 ```
 
-删除配置文件：
-
+Delete configuration file:
 ```bash
-cursor-mate.exe delete
+cursor-mate delete
 ```
 
-终止 Cursor 进程：
-
+Terminate Cursor processes:
 ```bash
-cursor-mate.exe kill
+cursor-mate kill
 ```
 
-## 许可证
+## License
 
 [MIT](LICENSE)
-
- 
